@@ -32,8 +32,7 @@ JETTY_PORT=<%= scope.lookupvar('jetty::port') %>
 #JETTY_ARGS=
 
 # Extra options to pass to the JVM
-JAVA_OPTIONS="-Djetty.class.path='<% if scope.lookupvar('jetty::config::java') == 'openjava' -%>/usr/lib/jvm/java-6-openjdk/lib:<% elsif scope.lookupvar('jetty::config::java') == 'sunjava' -%>/usr/lib/jvm/java-6-sun:<% end -%>/usr/share/jetty/lib' -Xmx256m -Djava.awt.headless=true <% if scope.lookupvar('jetty::proxy_host') -%>-Dhttp.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %> -Dhttps.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %><% end -%> <% if scope.lookupvar('jetty::proxy_port') -%>-Dhttp.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %> -Dhttps.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %><% end -%>"
-
+JAVA_OPTIONS="-Djetty.class.path='<% if scope.lookupvar('jetty::config::java') == 'openjava' -%>/usr/lib/jvm/java-6-openjdk/lib:<% elsif scope.lookupvar('jetty::config::java') == 'sunjava' -%>/usr/lib/jvm/java-6-sun:<% end -%>/usr/share/jetty/lib' <% if scope.lookupvar('jetty::remote_debug')%>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8998 <% end -%>-Xmx256m -Djava.awt.headless=true <% if scope.lookupvar('jetty::proxy_host') -%>-Dhttp.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %> -Dhttps.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %><% end -%> <% if scope.lookupvar('jetty::proxy_port') -%>-Dhttp.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %> -Dhttps.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %><% end -%><% if scope.lookupvar('jetty::log_root') -%> -Dcustom.logging.root=<%= scope.lookupvar('jetty::log_root') %><% end -%>"
 # Home of Java installation.
 <% if scope.lookupvar('jetty::config::java') == 'openjava' -%>
 JAVA_HOME=/usr/lib/jvm/java-6-openjdk

@@ -16,13 +16,21 @@
 # [*proxy_port*]
 #  Proxy server port. Default: none
 #
+# [*log_root*]
+#  Custom logging root. Default: none
+#
+# [*remote_debug*]
+#  Turn on Remote Debugging. Default: false
+#
 # === Examples
 #
 # class { 'jetty':
-#   bind_local => true,
-#   port       => '8080',
-#   proxy_host => 'proxy.example.com',
-#   proxy_port => '3128',
+#   bind_local   => true,
+#   port         => '8080',
+#   proxy_host   => 'proxy.example.com',
+#   proxy_port   => '3128',
+#   log_root     => '/var/www/project/logs',
+#   remote_debug => 'true',
 # }
 #
 # === Authors
@@ -30,10 +38,12 @@
 # Sergey Stankevich
 #
 class jetty (
-  $bind_local = true,
-  $port       = '8080',
-  $proxy_host = false,
-  $proxy_port = false
+  $bind_local   = true,
+  $port         = '8080',
+  $proxy_host   = false,
+  $proxy_port   = false,
+  $log_root     = false,
+  $remote_debug = false
 ) {
 
   # Module compatibility check
