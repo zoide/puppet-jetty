@@ -31,7 +31,7 @@
 #   proxy_port   => '3128',
 #   log_root     => '/var/www/project/logs',
 #   remote_debug => 'true',
-# }
+#}
 #
 # === Authors
 #
@@ -43,12 +43,15 @@ class jetty (
   $proxy_host   = false,
   $proxy_port   = false,
   $log_root     = false,
-  $remote_debug = false
-) {
-
+  $remote_debug = false,
+  $timezone     = 'America/Los_Angeles',
+  $javaoptions  = '-Xmx256M',
+  $logfile_days = '365',
+  $jdk_dirs     = false) {
   # Module compatibility check
-  $compatible = [ 'Debian', 'Ubuntu' ]
-  if ! ($::operatingsystem in $compatible) {
+  $compatible = ['Debian', 'Ubuntu']
+
+  if !($::operatingsystem in $compatible) {
     fail("Module is not compatible with ${::operatingsystem}")
   }
 

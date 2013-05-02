@@ -1,8 +1,7 @@
 class jetty::config {
-
-  if defined( Class['openjava'] ) {
+  if defined(Class['openjava']) {
     $java = 'openjava'
-  } elsif defined( Class['sunjava'] ) {
+  } elsif defined(Class['sunjava']) {
     $java = 'sunjava'
   }
 
@@ -24,8 +23,8 @@ class jetty::config {
   file {
     '/etc/default/jetty':
       content => template('jetty/jetty.erb');
+
     '/etc/jetty/jetty.xml':
       content => template('jetty/jetty.xml.erb');
   }
-
 }
