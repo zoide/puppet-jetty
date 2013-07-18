@@ -26,5 +26,8 @@ class jetty::config {
 
     '/etc/jetty/jetty.xml':
       content => template('jetty/jetty.xml.erb');
+
+    '/etc/jetty/jetty.conf':
+      content => template('jetty/jetty.conf.erb');
   }
 }

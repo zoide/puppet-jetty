@@ -1,0 +1,7 @@
+### PUPPET MANAGED ####
+# list of jetty configuration and property files
+<% if scope.lookupvar('jetty::logbackconf') == false -%>
+/etc/jetty/jetty-logging.xml
+<% end -%>
+/etc/jetty/jetty.xml
+/etc/jetty/jetty-shared-webapps.xml
