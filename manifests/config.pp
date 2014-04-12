@@ -4,7 +4,7 @@ class jetty::config {
   } elsif defined(Class['sunjava']) {
     $java = 'sunjava'
   }
-
+  
   service { 'jetty':
     ensure     => running,
     enable     => true,
