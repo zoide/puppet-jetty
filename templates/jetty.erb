@@ -32,7 +32,8 @@ JETTY_PORT=<%= scope.lookupvar('jetty::port') %>
 #JETTY_ARGS=
 
 # Extra options to pass to the JVM
-JAVA_OPTIONS="-Djetty.class.path='<% if scope.lookupvar('jetty::config::java') == 'openjava' -%>/usr/lib/jvm/java-7-openjdk-amd64/lib:<% elsif scope.lookupvar('jetty::config::java') == 'sunjava' -%>/usr/lib/jvm/java-6-sun:<% end -%>/usr/share/jetty/lib' <% if scope.lookupvar('jetty::remote_debug')%>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8998 <% end -%><% if scope.lookupvar('jetty::javaoptions') -%><%= scope.lookupvar('jetty::javaoptions') %><% end -%><% if scope.lookupvar('jetty::logbackconf') -%> -Dlogback.configurationFile=<%= scope.lookupvar('jetty::logbackconf') %><% end -%> -Djava.awt.headless=true <% if scope.lookupvar('jetty::proxy_host') -%>-Dhttp.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %> -Dhttps.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %><% end -%> <% if scope.lookupvar('jetty::proxy_port') -%>-Dhttp.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %> -Dhttps.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %><% end -%><% if scope.lookupvar('jetty::log_root') -%> -Dcustom.logging.root=<%= scope.lookupvar('jetty::log_root') %><% end -%>"
+JAVA_OPTIONS="<% if scope.lookupvar('jetty::remote_debug')%>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8998 <% end -%><% if scope.lookupvar('jetty::javaoptions') -%><%= scope.lookupvar('jetty::javaoptions') %><% end -%><% if scope.lookupvar('jetty::logbackconf') -%> -Dlogback.configurationFile=<%= scope.lookupvar('jetty::logbackconf') %><% end -%> -Djava.awt.headless=true <% if scope.lookupvar('jetty::proxy_host') -%>-Dhttp.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %> -Dhttps.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %><% end -%> <% if scope.lookupvar('jetty::proxy_port') -%>-Dhttp.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %> -Dhttps.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %><% end -%><% if scope.lookupvar('jetty::log_root') -%> -Dcustom.logging.root=<%= scope.lookupvar('jetty::log_root') %><% end -%>"
+#JAVA_OPTIONS="-Djetty.class.path='/usr/share/java/commons-logging.jar:<% if scope.lookupvar('jetty::config::java') == 'openjava' -%>/usr/lib/jvm/java-7-openjdk-amd64/lib:<% elsif scope.lookupvar('jetty::config::java') == 'sunjava' -%>/usr/lib/jvm/java-6-sun:<% end -%>/usr/share/jetty/lib:/usr/share/java' <% if scope.lookupvar('jetty::remote_debug')%>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8998 <% end -%><% if scope.lookupvar('jetty::javaoptions') -%><%= scope.lookupvar('jetty::javaoptions') %><% end -%><% if scope.lookupvar('jetty::logbackconf') -%> -Dlogback.configurationFile=<%= scope.lookupvar('jetty::logbackconf') %><% end -%> -Djava.awt.headless=true <% if scope.lookupvar('jetty::proxy_host') -%>-Dhttp.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %> -Dhttps.proxyHost=<%= scope.lookupvar('jetty::proxy_host') %><% end -%> <% if scope.lookupvar('jetty::proxy_port') -%>-Dhttp.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %> -Dhttps.proxyPort=<%= scope.lookupvar('jetty::proxy_port') %><% end -%><% if scope.lookupvar('jetty::log_root') -%> -Dcustom.logging.root=<%= scope.lookupvar('jetty::log_root') %><% end -%>"
 # Home of Java installation.
 <% if scope.lookupvar('jetty::config::java') == 'openjava' -%>
 JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
@@ -56,7 +57,7 @@ JDK_DIRS="<%= scope.lookupvar('jetty::jdk_dirs') %>"
 #JETTY_TMP=/var/cache/jetty
 
 # Jetty uses a config file to setup its boot classpath
-#JETTY_START_CONFIG=/etc/jetty/start.config
+JETTY_START_CONFIG=/etc/jetty/start.config
 
 # Default for number of days to keep old log files in /var/log/jetty/
 LOGFILE_DAYS=<%= scope.lookupvar('jetty::logfile_days') %>
