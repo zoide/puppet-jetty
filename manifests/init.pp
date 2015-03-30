@@ -47,6 +47,7 @@ class jetty (
   $timezone     = 'America/Los_Angeles',
   $javaoptions  = '-Xmx256M',
   $logfile_days = '365',
+  $logbackconf  = false,
   $jdk_dirs     = false) {
   # Module compatibility check
   $compatible = ['Debian', 'Ubuntu']
@@ -57,6 +58,10 @@ class jetty (
 
   Class['jetty::install'] -> Class['jetty::config']
 
+  if $logbackconf != false {
+    include jetty::logback
+    Class['jetty::install'] -> Class['jetty::config'] -> Class['jetty::logback']
+  }
   include jetty::install
   include jetty::config
 

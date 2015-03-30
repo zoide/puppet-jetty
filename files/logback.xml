@@ -1,0 +1,38 @@
+<!-- 
+
+!!!! PUPPET MANAGED !!! 
+
+Example LOGBACK Configuration File 
+http://logback.qos.ch/manual/configuration.html 
+
+-->
+<configuration scan="true">
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%date{MMM dd HH:mm:ss} ${HOSTNAME} jetty[%thread]: %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${jetty.home}/logs/jetty.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>jetty_%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%date{MMM dd HH:mm:ss} ${HOSTNAME} jetty[%thread]: %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<!-- <appender-ref ref="STDOUT" /> -->
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>
